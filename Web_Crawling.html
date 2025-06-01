@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Website Crawling</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="shortcut icon" href="images/donkeykong.gif">
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class='is-preload'>
+    <script>
+    function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("active");
+        document.getElementById("overlay").classList.toggle("active");
+    }
+
+    let slideIndex = 1;
+
+    window.onload = function() {
+        showSlides(slideIndex);
+    };
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        const slides = document.getElementsByClassName("slide");
+        const dots = document.getElementsByClassName("dot");
+
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.remove("active");
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].classList.add("active");
+    }
+    </script>
+    <div class="topbar">
+        <span class="toggle-btn" onclick="toggleSidebar()">☰</span>
+        <span style="margin-left: 16px;"></span>
+    </div>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="index.html">Introduction</a>
+        <a href="Web_Crawling.html">Web Crawling</a>
+        <a href="Data.html">Results</a>
+    </div>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+    <!-- Header -->
+    <section id="three" class="main style1 special">
+        <div class="container">
+            <header class="major">
+                <h1>Website Crawling</h1>
+            </header>
+            <p>This project required two essential dataset, Submarine Cable and Location of Ship Vessel in order to analyse the relationship between them. </p>
+            <div class="row gtr-150">
+                <div class="col-6 col-12-medium">
+                    <span class="image fit"><img src="images/Submarine.png" alt="" /></span>
+                </div>
+                <div class="col-6 col-12-medium">
+                    <h3 style="text-align:left;">Submarine Cable</h3>
+                    <p style="text-align:justify;">The submarine cable data is obtained by assessing <a href="https://submarinecablemap.com">submarinecablemap.com</a>. By browsing through the js file of their website ,what I find is the landing station of each submarine cable(Point)and the estimated location of cable(MultiLineString). After spatial joining both data , we could perform network analysis to find out the importance of each cable. </p>
+                </div>
+            </div>
+            <div class="row gtr-150">
+                <div class="col-6 col-12-medium">
+                    <span class="image fit"><img src="images/Ship_Vessel.png" alt="" /></span>
+                </div>
+                <div class="col-6 col-12-medium">
+                    <h3 style="text-align:left;">Ship Vessel</h3>
+                    <p style="text-align:justify;">The website I used to obtained the data of ship vessels is <a href='https://www.myshiptracking.com' target='_blank'>https://www.myshiptracking.com</a>. The locations of ship vessels can be obtained by accessing the detailed data provided for each vessel. By retrieving the longitude and latitude of each ship, we can convert the coordinates into a text-based markup format known as Well-Known Text (WKT), which represents vector geometry objects. After that, we can plot a global-scale map showing the locations of ship vessels.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="one" class="main style2">
+        <div class="container">
+            <div class="row gtr-150">
+                <div class="col-5 col-12-medium">
+                    <header class="major">
+                        <h2>Crawling the data</h2>
+                    </header>
+                    <p style="text-align:justify;">The ship vessel location data was crawled from <a href='https://www.myshiptracking.com' target='_blank'>https://www.myshiptracking.com</a>. Compared to other ship tracking websites, this site is crawlable and provides data for over 1,000,000 vessel locations.</p>
+                    <p style="text-align:justify;">The main challenge when crawling this website is that I can't directly access all ship vessels. I can only access 10,000 data of vessels whose locations were updated a few minutes ago. Therefore, by repeatedly crawling the webpage and removing duplicates, I was able to collect data for a total of 70,000 vessels this month.</p>
+                    <p style="text-align:justify;">After obtaining the URLs of these vessels, I retrieved their location data by crawling each URL. The steps and results are shown.</p>
+                </div>
+                <div class="col-7 col-12-medium">
+                    <div class="slideshow-container">
+                        <div class="slide">
+                            <img src="images/Vessel Database.png" alt="Slide 1">
+                            <p class="caption">Step 1: Repeatly crawling <a href="https://www.myshiptracking.com/vessels">vessel database</a> every minutes for getting the URL of vessels.</p>
+                        </div>
+                        <div class="slide">
+                            <img src="images/Ship Details.png" alt="Slide 2">
+                            <p class="caption">Step 2: Crawling each vessel's URL to retrieve the locations and details of each ship.</p>
+                        </div>
+                        <div class="slide">
+                            <img src="images/data.png" alt="Slide 3">
+                            <p class="caption">Step 3: Exporting to CSV and convert the coordinates into Well-Known Text (WKT). </p>
+                        </div>
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                    <div class="dots">
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <section id="one" class="main style1 special">
+        <div class="container">
+            <div class="row gtr-150">
+                <div class="col-6 col-12-medium">
+                    <span class="image fit"><img src="images/Myshiptracking.png" alt="" /></span>
+                </div>
+                <div class="col-6 col-12-medium">
+                    <header>
+                        <h2 style="text-align:left;">Limitation</h2>
+                    </header>
+                    <p style="text-align:justify;">Data limitation is the biggest challenge I faced in this project. The website <a href='https://www.myshiptracking.com' target='_blank'>https://www.myshiptracking.com</a> only provides the locations of ship vessels tracked by AIS, while doesn't include those tracked via satellite. This results in a significant bias in the data and makes the results less representative of reality.</p>
+                    </p>
+                </div>
+            </div>
+            <ul class="actions special">
+                <li><a href="Data.html" class="button">Analysis Result</a></li>
+            </ul>
+    </section>
+</body>
+
+</html>

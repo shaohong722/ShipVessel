@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Result</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="shortcut icon" href="images/donkeykong.gif">
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class='is-preload'>
+    <script>
+        function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("active");
+        document.getElementById("overlay").classList.toggle("active");
+    }
+    </script>
+    <div class="topbar">
+        <span class="toggle-btn" onclick="toggleSidebar()">☰</span>
+        <span style="margin-left: 16px;"></span>
+    </div>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="index.html">Introduction</a>
+        <a href="Web_Crawling.html">Web Crawling</a>
+        <a href="Data.html">Results</a>
+    </div>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+    <!-- Header -->
+    <section id="one" class="main style2">
+        <div class="container">
+            <div class="row gtr-150">
+                <div class="col-6 col-12-medium">
+                    <header class="major">
+                        <h2>Kernel Density Estimation</h2>
+                    </header>
+                    <p>After crawling a total of 70,000 vessel location records over a period of three weeks, I estimated ship movements by connecting individual points to reconstruct maritime routes. Kernel Density Estimation (KDE) was then applied to determine the density of these maritime paths.</p>
+                    <p>Subsequently, by performing a spatial intersection between the vessel density and submarine cable locations, we identified segments of submarine cables that are highly correlated with vessel routes.</p>
+                    <p>Understanding the relationship between vessel routing and submarine cables provides valuable insights into the vulnerability of these cables. Based on this information, we can simulate scenarios such as accidental damage to specific submarine cables caused by ship anchors. This allows us to assess the potential impact on the overall cable network.</p>
+                </div>
+                <div class="col-6 col-12-medium">
+                    <span class="image fit"><img src="images/Kernel Density.png" style="width:100%"></span>
+                    <span class="image fit"><img src="images/Kernel Line.png" style="width:100%"></span>
+                </div>
+            </div>
+    </section>
+    <section id="two" class="main style3">
+        <div class="container">
+            <div class="row gtr-150">
+                <div class="col-12 col-12-medium">
+                    <header class="major">
+                        <h2>Betweenness Centrality Analysis</h2>
+                    </header>
+                    <p>To calculate the importance of submarine cables, I used the method of Betweenness Centrality (BC).</p>
+                    <p>First, in an ideal scenario where all submarine cables function properly, I calculated the importance of each cable within the network. The cables named <em>2Africa</em>, <em>Medusa Submarine Cable System</em>, <em>Havfrue/AEC-2</em>, <em>Confluence-1</em>, and <em>South America-1 (SAM-1)</em> were identified as the top five most important cables under this scenario. The BC values are shown in the table below.</p>
+                </div>
+                <div class="col-12 col-12-medium">
+                    <embed type="text/html" src="Importance_SC.html" width=100% height=300px>
+                </div>
+                <div class="col-12 col-12-medium">
+                    <p></p>
+                    <h4>What if the submarine cables are intentionally destroyed?</h4>
+                    <p>What if the 10 most important submarine cables were intentionally destroyed? What would happen to the rest of the network? To simulate a scenario in which these key cables are targeted, I removed the top 10 cables identified earlier and analyzed the network again. This allowed me to observe which other cables become important and take on a critical substitutive role.</p>
+                    <p>The cables <em>Europe-India Gateway (EIG)</em>, <em>South American Crossing (SAC)</em>, <em>Bifrost</em>, <em>Pan-American Crossing (PAC)</em>, and <em>Apricot</em> emerged as the top five candidates for substitution in the event of cable being intentionally destroyed.</p>
+                    <div class="col-12 col-12-medium">
+                        <embed type="text/html" src="Top_10_Cable_Destroy.html" width=100% height=300px>
+                    </div>
+                </div>
+                <div class="col-12 col-12-medium">
+                    <h3>The Vulnerability of Submarine Cables</h3>
+                    <p>Finally, by simulating the destruction of submarine cables based on Kernel Density Estimation (KDE) results, cable segments with high KDE values (above 80%) were removed. This approach helps identify which cables are both critical and potentially more secure.</p>
+                    <p>The results highlight the following cables as particularly important and resilient: <em>2Africa</em>, <em>Medusa Submarine Cable System</em>, <em>FLAG Europe-Asia (FEA)</em>, <em>EllaLink</em>, and <em>South America-1 (SAM-1)</em>.</p>
+                    <div class="col-12 col-12-medium">
+                        <embed type="text/html" src="KDE_destroy.html" width=100% height=300px>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <section class="main style2">
+        <div class="container">
+            <div class="row gtr-150">
+                <div class="col-12 col-12-medium">
+                    <iframe src="map_output.html" height="350px" class="map"></iframe>
+                </div>
+                <div class="col-12 col-12-medium">
+                    <h2>Conclusion</h2>
+                    <p>This project successfully crawled 70,000 ship vessel data points. I used this data to analyze the relationship between vessel movement and submarine cables. In the map above, the important cables mentioned earlier from three scenario are highlighted in blue. As we can see, the coastlines of western America and southern Africa play a crucial role in global connectivity and should be prioritized for protection.</p>
+                    <p>However, this project still lacks a more comprehensive dataset of ship vessel movements, which may significantly influence the results presented above. Hopefully, in the future, I will be able to collect more data to improve the accuracy and reliability of the findings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
